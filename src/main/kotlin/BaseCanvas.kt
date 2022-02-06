@@ -10,7 +10,7 @@ fun runSketch(canvas: BlankCanvas) {
     PApplet.runSketch(arrayOf("Art"), canvas)
 }
 
-abstract class BlankCanvas: KPApplet() {
+abstract class BlankCanvas(private val framesPerDraw: Int = 1): KPApplet() {
     private var lastCheck = System.nanoTime()
     private var classBytes: ByteArray? = null
 
@@ -20,7 +20,7 @@ abstract class BlankCanvas: KPApplet() {
     }
 
     override fun setup() {
-        colorMode(PApplet.HSB, 360f, 100f, 100f)
+        colorMode(HSB, 360f, 100f, 100f)
         background(0f, 0f, 100f)
         stroke(0f, 0f, 0f)
     }
@@ -34,12 +34,12 @@ abstract class BlankCanvas: KPApplet() {
                 reader.accept(tcv, 0)
                 val currentClassBytes = bos.toByteArray()
                 if (classBytes == null) {
-                    drawOnReload()
+                    repeat(framesPerDraw) { drawOnReload(it.toFloat()) }
                     classBytes = currentClassBytes
                 } else {
                     if (!classBytes.contentEquals(currentClassBytes)) {
                         classBytes = currentClassBytes
-                        drawOnReload()
+                        repeat(framesPerDraw) { drawOnReload(it.toFloat()) }
                     }
                 }
                 lastCheck = System.nanoTime()
@@ -48,5 +48,10 @@ abstract class BlankCanvas: KPApplet() {
         }
     }
 
-    abstract fun drawOnReload()
+    open fun drawOnReload() {
+    }
+
+    open fun drawOnReload(frame: Float) {
+        drawOnReload(frame)
+    }
 }
