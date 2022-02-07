@@ -1,14 +1,9 @@
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.util.TraceClassVisitor
-import processing.core.PApplet
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.PrintWriter
 import java.time.Duration
-
-fun runSketch(canvas: BlankCanvas) {
-    PApplet.runSketch(arrayOf("Art"), canvas)
-}
 
 abstract class BlankCanvas(private val framesPerDraw: Int = 1): KPApplet() {
     private var lastCheck = System.nanoTime()
