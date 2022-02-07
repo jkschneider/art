@@ -2,20 +2,22 @@
 
 plugins {
   kotlin("jvm") version "1.6.10"
+  id("org.openjfx.javafxplugin") version "0.0.10"
 }
 
-kotlin {
-  jvmToolchain {
-    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of("8"))
-  }
+javafx {
+  version = "17"
+  modules = listOf("javafx.controls")
 }
 
 repositories {
   mavenCentral()
+  mavenLocal()
 }
 
 dependencies {
-  implementation("org.processing:core:latest.release")
+  implementation("com.jkschneider:processing4:4.0-b5")
+  implementation("com.jkschneider:processing4-javafx:4.0-b5")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
 
   implementation("org.ow2.asm:asm:latest.release")

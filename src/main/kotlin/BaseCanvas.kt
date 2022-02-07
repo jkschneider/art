@@ -11,7 +11,7 @@ abstract class BlankCanvas(private val framesPerDraw: Int = 1): KPApplet() {
 
     override fun settings() {
         // mac 13" 33% width, 100% height
-        size(480, 850)
+        size(480, 850, FX2D)
     }
 
     override fun setup() {

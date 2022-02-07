@@ -3,11 +3,10 @@ package programs
 import BlankCanvas
 import runSketch
 
-fun main() = runSketch(object : BlankCanvas(400) {
+fun main() = runSketch(object : BlankCanvas(480) {
     override fun setup() {
         super.setup()
         noStroke()
-        background(0)
     }
 
     override fun drawOnReload(frame: Float) {
